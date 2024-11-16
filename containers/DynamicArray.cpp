@@ -1,10 +1,11 @@
 #include <iostream>
 
+template <typename T>
 class DynamicArray {
     private:
     size_t capacity_;
     size_t length_;
-    int* arr;
+    T* arr;
 
     public:
 
@@ -13,10 +14,10 @@ class DynamicArray {
             throw std::invalid_argument("Capacity must be a positive integer");
         }
         capacity_ = static_cast<size_t>(capacity);
-        arr = new int[capacity_];
+        arr = new T[capacity_];
     }
 
-    DynamicArray() : capacity_(1), length_(0), arr(new int[1]) {}
+    DynamicArray() : capacity_(1), length_(0), arr(new T[1]) {}
 
 
     ~DynamicArray() {
@@ -28,7 +29,7 @@ class DynamicArray {
     // TODO: Move constructor
     // TODO: Move assignment operator
 
-    int get(int i) {
+    T get(int i) {
 
         if (i < 0 || static_cast<size_t>(i) >= length_) {
             throw std::out_of_range("Index out of bounds");
@@ -37,22 +38,21 @@ class DynamicArray {
         return arr[i];
     }
 
-    void set(int i, int n) {
+    // TODO: change to const T& n
+    void set(int i, const T& n) {
         if (i < 0 || static_cast<size_t>(i) >= length_) {
-        throw std::out_of_range("Index out of bounds");
-    }
-    if (length_ == 0) {
-        throw std::underflow_error("Cannot set value; array is empty.");
-    }
-
-        arr[i] = n;
-    }
-
-    void pushback(int n) {
-
-        if (n > std::numeric_limits<int>::max() || n < std::numeric_limits<int>::min()) {
-            throw std::overflow_error("Value is out of range for int");
+            throw std::out_of_range("Index out of bounds");
         }
+        if (length_ == 0) {
+            throw std::underflow_error("Cannot set value; array is empty.");
+        }
+
+            arr[i] = n;
+    }
+
+    // TODO: change to const T& n
+    void pushback(const T& n) {
+
         if (length_ == capacity_) {
             resize(); // what are the different ways to call this (this->resize(); ?)
         }
@@ -60,18 +60,18 @@ class DynamicArray {
         length_++;
     }
 
-    int popback() {
+    T popback() {
         if (length_ == 0) {
             throw std::underflow_error("Array is empty");
         }
-        int element = arr[length_-1];
+        T element = arr[length_-1];
         length_--;
         return element;
     }
 
     void resize() {
 
-        int* new_arr = new int[capacity_*2];
+        T* new_arr = new T[capacity_*2];
 
         for (size_t i = 0; i < length_; i++) {
             new_arr[i] = arr[i];

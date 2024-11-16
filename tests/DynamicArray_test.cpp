@@ -4,12 +4,12 @@
 void testDynamicArray() {
     try {
         std::cout << "=== Testing Constructors ===\n";
-        DynamicArray defaultArray;
+        DynamicArray<int> defaultArray;
         std::cout << "Default constructor test passed. Capacity: " 
                   << defaultArray.getCapacity() 
                   << ", Size: " << defaultArray.getSize() << "\n";
 
-        DynamicArray customArray(5);
+        DynamicArray<int> customArray(5);
         std::cout << "Custom constructor test passed. Capacity: " 
                   << customArray.getCapacity() 
                   << ", Size: " << customArray.getSize() << "\n";
@@ -55,7 +55,7 @@ void testDynamicArray() {
         }
 
         try {
-            DynamicArray invalidArray(0); // Invalid capacity
+            DynamicArray<int> invalidArray(0); // Invalid capacity
         } catch (const std::invalid_argument& e) {
             std::cout << "Caught exception: " << e.what() << "\n";
         }

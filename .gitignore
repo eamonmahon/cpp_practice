@@ -12,3 +12,6 @@
 # Ignore build directories recursively
 **/build/
 **/dist/
+
+# Ignore specific program
+DynamicArray_test
