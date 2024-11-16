@@ -1,1 +1,14 @@
+# macOS system files
 .DS_Store
+
+# Ignore all compiled binaries (applies to all directories)
+*.exe
+*.out
+*.o
+*.a
+*.so
+*.dylib
+
+# Ignore build directories recursively
+**/build/
+**/dist/
